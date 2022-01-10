@@ -15,7 +15,13 @@
                 <button id="disconnect" class="button">Disconnect All</button>
         </div>
         <div class="row header">
-                <button id="send" class="button">Send "Test" to All</button>
+            <button id="LigSwiOn" class="button">Light on</button>
+        <div class="row header">
+            <button id="LigSwiOff" class="button">Light off</button>
+        <div class="row header">
+            <button id="LigClpOn" class="button">Add clap preference</button>
+        <div class="row header">
+            <button id="LigClpOff" class="button">Remove clap preference</button>
         </div>
         <div class="row header">
                 <button id="clear" class="button">Clear Console</button>
@@ -75,7 +81,10 @@
     document.getElementById("connect").addEventListener("click", () => uBitConnectDevice(uBitEventHandler))
     document.getElementById("disconnect").addEventListener("click", () => connectedDevices.forEach(d=>uBitDisconnect(d)))
     document.getElementById("clear").addEventListener("click", () => { document.getElementById("console").innerHTML = "" })
-    document.getElementById("send").addEventListener("click", () => { connectedDevices.forEach( d=>uBitSend(d, "Test")) })
+    document.getElementById("LigSwiOn").addEventListener("click", () => { connectedDevices.forEach( d=>uBitSend(d, "LigSwiOn")) })
+    document.getElementById("LigSwiOff").addEventListener("click", () => { connectedDevices.forEach( d=>uBitSend(d, "LigSwiOff")) })
+    document.getElementById("LigClpOn").addEventListener("click", () => { connectedDevices.forEach( d=>uBitSend(d, "LigClpOn")) })
+    document.getElementById("LigClpOff").addEventListener("click", () => { connectedDevices.forEach( d=>uBitSend(d, "LigClpOff")) })
 
 </script>
 
