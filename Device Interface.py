@@ -5,10 +5,18 @@ clpPref = "None"
 radio.set_group(1)
 
 #List of usable ports
-ports = [DigitalPin.P0, DigitalPin.P1, DigitalPin.P2]
+periphPorts = [DigitalPin.P0, DigitalPin.P1, DigitalPin.P2]
 
 #Makecode is poor at supporting dictionaries. We must instead use lists of equal lengths
-peripherals = ["Lig", "Cur", "Doo"]
+periphKeys = ["Lig", "Cur", "Doo"]
+
+#The state of each peripheral. The Microbit is not consistent at reading pins,
+#So we must record its state.
+periphState = [0, 0, 0]
+
+def on_data_received():
+    req = serial.read_until(serial.delimiters(Delimiters.NEW_LINE))
+    on_received_string(req)
 
 #A string is radio'd
 def on_received_string(req):
@@ -26,12 +34,16 @@ def on_received_string(req):
         clapSet(dev, par)
 
 def switch(device : str, state):
-    global peripherals
+    global periphState
+
+    if device == "None":
+        return
 
     #MakeCode does not play nice with dictionaries, so I'm forced to use strange methods.
     for index in range(0, 2):
-        if peripherals[index] == device:
-            targetPort = ports[index]
+        if periphKeys[index] == device:
+            targetPort = periphPorts[index]
+            targetIndex = index
 
     #Convert string to binary.
     if state == "On": binary = 1
@@ -42,6 +54,7 @@ def switch(device : str, state):
     #Check if a valid binary value was made
     if binary == 1 or binary == 0:
         pins.digital_write_pin(targetPort, binary)
+        periphState[targetIndex] = binary
 
     #Toggle beg------------------------------------------------------------------------------------
     
@@ -49,11 +62,14 @@ def switch(device : str, state):
     elif state == "Toggle":
 
         #If the device is off, turn it on.
-        if pins.digital_read_pin(targetPort) == 0: pins.digital_write_pin(targetPort, 1)
+        if periphState[targetIndex] == 0:
+            pins.digital_write_pin(targetPort, 1)
+            periphState[targetIndex] = 1
         #and vice versa
-        elif pins.digital_read_pin(targetPort) == 1: pins.digital_write_pin(targetPort, 0)
-        #The state is 'None' or invalid.
-        else: return
+        else: 
+            pins.digital_write_pin(targetPort, 0)
+            periphState[targetIndex] = 0
+            basic.show_icon(IconNames.HEART)
 
     #Toggle end------------------------------------------------------------------------------------
 
@@ -69,16 +85,13 @@ def clapSet(device, state):
     elif state == "On":
         clpPref = device
 
-
-
 def on_sound_loud():
         switch(clpPref, "Toggle")
         return
 
-
 def on_forever():
     radio.on_received_string(on_received_string)
     input.on_sound(DetectedSound.LOUD, on_sound_loud)
-    
+    serial.on_data_received(serial.delimiters(Delimiters.NEW_LINE), on_data_received)
 
 basic.forever(on_forever)
