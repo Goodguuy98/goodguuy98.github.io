@@ -1,6 +1,14 @@
 #Used in clapSet.
-clpPref = {"device" : "None"}
+clpPref = "None"
+
+#The radio communicates in group 1.
 radio.set_group(1)
+
+#List of usable ports
+ports = [DigitalPin.P0, DigitalPin.P1, DigitalPin.P2]
+
+#Makecode is poor at supporting dictionaries. We must instead use lists of equal lengths
+peripherals = ["Lig", "Cur", "Doo"]
 
 #A string is radio'd
 def on_received_string(req):
@@ -18,6 +26,12 @@ def on_received_string(req):
         clapSet(dev, par)
 
 def switch(device : str, state):
+    global peripherals
+
+    #MakeCode does not play nice with dictionaries, so I'm forced to use strange methods.
+    for index in range(0, 2):
+        if peripherals[index] == device:
+            targetPort = ports[index]
 
     #Convert string to binary.
     if state == "On": binary = 1
@@ -27,41 +41,17 @@ def switch(device : str, state):
 
     #Check if a valid binary value was made
     if binary == 1 or binary == 0:
-        #Use it to change device state.
-        if device == "Lig": pins.digital_write_pin(DigitalPin.P0, binary)
-        if device == "Cur": pins.digital_write_pin(DigitalPin.P1, binary)
-        if device == "Doo": pins.digital_write_pin(DigitalPin.P2, binary)
+        pins.digital_write_pin(targetPort, binary)
 
     #Toggle beg------------------------------------------------------------------------------------
-    #Sadly this code is convuluted as makecode is very difficult to navigate.
-    #I attempted to use a dictionary, but they don't appear to behave the same way as in python.
-    #When there's an error it's given in javascript terms, which I can't work with.
     
     #Used in case of clap.
     elif state == "Toggle":
 
-        #The device is light
-        if device == "Lig":
-
-            #If the device is off, turn it on.
-            if pins.digital_read_pin(DigitalPin.P0) == 0: pins.digital_write_pin(DigitalPin.P0, 1)
-            #The device is on, turn it off.
-            else: pins.digital_write_pin(DigitalPin.P0, 0)
-        
-        #The device is curtain
-        elif device == "Cur":
-            #If the device is off, turn it on.
-            if pins.digital_read_pin(DigitalPin.P0) == 0: pins.digital_write_pin(DigitalPin.P0, 1)
-            #The device is on, turn it off.
-            else: pins.digital_write_pin(DigitalPin.P0, 0)
-
-        #The device is Door
-        elif device == "Doo":
-            #If the device is off, turn it on.
-            if pins.digital_read_pin(DigitalPin.P0) == 0: pins.digital_write_pin(DigitalPin.P0, 1)
-            #The device is on, turn it off.
-            else: pins.digital_write_pin(DigitalPin.P0, 0)
-
+        #If the device is off, turn it on.
+        if pins.digital_read_pin(targetPort) == 0: pins.digital_write_pin(targetPort, 1)
+        #and vice versa
+        elif pins.digital_read_pin(targetPort) == 1: pins.digital_write_pin(targetPort, 0)
         #The state is 'None' or invalid.
         else: return
 
@@ -70,23 +60,19 @@ def switch(device : str, state):
 #For changing clap preference
 def clapSet(device, state):
     global clpPref
-
-    basic.show_string("Yes")
+    
     #Request turned clapPref off.
     if state == "Off":
-        basic.show_string("off")
-        clpPref["device"] = "None"
+        clpPref = "None"
     
     #Request turned clapPref on for a given device.
     elif state == "On":
-
-        basic.show_string(device)
-        clpPref["device"] = device
+        clpPref = device
 
 
 
 def on_sound_loud():
-        switch(clpPref["device"], "Toggle")
+        switch(clpPref, "Toggle")
         return
 
 
