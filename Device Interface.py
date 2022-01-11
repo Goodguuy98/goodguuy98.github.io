@@ -18,6 +18,8 @@ def on_data_received():
     req = serial.read_until(serial.delimiters(Delimiters.NEW_LINE))
     on_received_string(req)
 
+
+
 #A string is radio'd
 def on_received_string(req):
     #We take all the data we need from the formatted string
@@ -65,10 +67,14 @@ def switch(device : str, state):
         if periphState[targetIndex] == 0:
             pins.digital_write_pin(targetPort, 1)
             periphState[targetIndex] = 1
+            serial.write_line(device + "SwiOn")
+            radio.send_string(device + "SwiOn")
         #and vice versa
         else: 
             pins.digital_write_pin(targetPort, 0)
             periphState[targetIndex] = 0
+            serial.write_line(device + "SwiOff")
+            radio.send_string(device + "SwiOff")
             basic.show_icon(IconNames.HEART)
 
     #Toggle end------------------------------------------------------------------------------------
