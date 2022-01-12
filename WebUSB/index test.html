@@ -78,12 +78,12 @@
     
     <!--Toggle switch-->
     <label class="switch" >
-        <input type="checkbox" id="LigSwi" onclick="toggle(id)" disabled>
+        <input type="checkbox" id="LigSwi" onclick="toggle(id)">
         <span class="slider round"></span>
     </label>
 
     <label class="switch" >
-        <input type="checkbox" id="LigClp" onclick="toggle(id)" disabled>
+        <input type="checkbox" id="LigClp" onclick="toggle(id)">
         <span class="slider round"></span>
     </label>
 
@@ -143,6 +143,7 @@
             
             case "connected":
                 consolePrintln("<b>Connected!</b>");
+                connectedDevices.push(device)
 
                 //Enable the each checkbox for use!
                 for (let i = 0; i < checkIds.length; i++) {
@@ -156,18 +157,25 @@
  
             case "disconnected":
                 consolePrintln("<b>Disconnected</b>")
+
                 //Disable the each checkbox for use!
                 //Set them to 'off state!'
-                //for (let i = 0; i < checkIds.length; i++) {
-                //    checkIds[i].disabled = true;
-                //    checkIds[i].checked = false;
-                //    }
+                for (let i = 0; i < checkIds.length; i++) {
+                    checkIds[i].disabled = true;
+                    checkIds[i].checked = false;
+                    }
                 
                 //The device is disconnected. Update the connection status.
-                //document.getElementById("ConnectStat").setAttribute("src", "assets/ex.png");
+                document.getElementById("ConnectStat").setAttribute("src", "assets/ex.png");
         
                 connectedDevices = connectedDevices.filter( v => v != device)
                 break
+
+            case "disconnected":
+                consolePrintln("<b>Disconnected</b>")
+                connectedDevices = connectedDevices.filter( v => v != device)
+                break
+
             case "connection failure":
                 consolePrintln("<b>Connection Failure</b>")
                 break

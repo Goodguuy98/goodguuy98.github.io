@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="UTF-8">
+    <title>Micro:bit WebUSB Console</title>
+    
+    <style>
+    /* The switch - the box around the slider */
+    .switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    }
+
+    /* Hide default HTML checkbox */
+    .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    }
+
+    /* The slider */
+    .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+    }
+
+    .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    }
+
+    input:checked + .slider {
+    background-color: #2196F3;
+    }
+
+    input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+    border-radius: 34px;
+    }
+
+    .slider.round:before {
+    border-radius: 50%;
+    }
+    </style>
+
+</head>
+
+<body>
+
+    <!--Toggle switch-->
+
+    <label class="switch" >
+        <input type="checkbox" id="LigSwi" onclick="toggle(id)">
+        <span class="slider round"></span>
+    </label>
+
+    <label class="switch" >
+        <input type="checkbox" id="LigClp" onclick="toggle(id)">
+        <span class="slider round"></span>
+    </label>
+
+
+    <div class="box")>
+
+        <!--Connect-->
+        <div class="row header">
+            <button id="connect" class="button" onclick="uBitConnectDevice(uBitEventHandler)">Connect</button>
+        </div>
+
+        <!--Disconnect-->
+        <div class="row header">
+            <button id="disconnect" class="button">Disconnect All</button>
+        </div>
+
+        <div class="row header">
+            <button id="LigSwiOn" class="button">Light on</button>
+        <div class="row header">
+            <button id="LigSwiOff" class="button">Light off</button>
+        <div class="row header">
+            <button id="LigClpOn" class="button">Add clap preference</button>
+        <div class="row header">
+            <button id="LigClpOff" class="button">Remove clap preference</button>
+        </div>
+        <div class="row header">
+                <button id="clear" class="button">Clear Console</button>
+        </div>
+
+        <div id="console" class="row content" style="overflow:auto;border:4px solid black;padding:2%">
+            Waiting for connection.
+        </div>                            
+    </div>
+</body>
+
+<!--  Include the webusb support library  -->
+<script src="ubitwebusb.js"></script>
+
+<script>
+
+    // Append a line to the console frame
+    function consolePrintln(message) {
+        var con = document.getElementById("console")
+        con.innerHTML += "<br/>"+message
+        con.scrollTop = con.scrollHeight
+    }
+
+    // List of connected devices (a single value could be used if only connecting to one device)
+    var connectedDevices = []
+
+    // Example event call-back handler
+    function uBitEventHandler(reason, device, data) {
+        switch(reason) {
+            case "connected":
+                consolePrintln("<b>Connected!</b>")
+                connectedDevices.push(device)
+                break
+            case "disconnected":
+                consolePrintln("<b>Disconnected</b>")
+                connectedDevices = connectedDevices.filter( v => v != device)
+                break
+            case "connection failure":
+                consolePrintln("<b>Connection Failure</b>")
+                break
+            case "error":
+                consolePrintln("<b>Error</b>")                
+                break
+            case "console":
+                consolePrintln("Console Data: " + data.data)
+                let checkId = data.data.slice(0, 6)
+                let stateReq = data.data.slice(6)
+                consolePrintln(checkId)
+                consolePrintln(stateReq)
+
+                if (stateReq === "On") {
+                    consolePrintln("yup")
+                    document.getElementById(checkId).checked = true;
+                } else if (stateReq === "Off") {
+                    consolePrintln("nop")
+                    document.getElementById(checkId).checked = false;
+                }
+                break
+
+            case "graph-event":
+                consolePrintln(`Graph Event:  ${data.data} (for ${data.graph}${data.series.length?" / series "+data.series:""})`)
+                break
+            case "graph-data":
+                consolePrintln(`Graph Data: ${data.data} (for ${data.graph}${data.series.length?" / series "+data.series:""})`)
+                break
+        }
+    }
+
+    function toggle(id) {
+        // Get the checkbox
+        var checkBox = document.getElementById(id);
+
+        //The ID already resembles the string that must be sent.
+        //We only need to add on the parameter.
+        var parOn = id + "On";
+        var parOff = id + "Off";
+
+        //If checkbox is checked, turn on device. If not, do not.
+        if (checkBox.checked == true) {
+
+            //parOn will look something like "DevSwiOn." The microbit will get its requested operation from this.
+            connectedDevices.forEach( d=>uBitSend(d, parOn));
+            //Disable the checkbox input.
+            checkBox.disabled = true;
+            //Enable checkbox input after 300ms. Gives the function time to execute so it doesn't desync with the microbit.
+            setTimeout(() => {  checkBox.disabled = false; }, 500);
+
+            consolePrintln(parOn)
+        } else {
+
+            //parOff will look something like "DevSwiOff." The microbit will get its requested operation from this.
+            connectedDevices.forEach( d=>uBitSend(d, parOff));
+            //Disable the checkbox input.
+            checkBox.disabled = true;
+            //Enable checkbox input after 300ms. Gives the function time to execute so it doesn't desync with the microbit.
+            setTimeout(() => {  checkBox.disabled = false; }, 500);
+
+            consolePrintln(parOff)
+        }
+    }
+
+    // Make the "go" button open the request devices box
+    document.getElementById("connect").addEventListener("click", () => uBitConnectDevice(uBitEventHandler))
+    document.getElementById("disconnect").addEventListener("click", () => connectedDevices.forEach(d=>uBitDisconnect(d)))
+    document.getElementById("clear").addEventListener("click", () => { document.getElementById("console").innerHTML = "" })
+    document.getElementById("LigSwiOn").addEventListener("click", () => { connectedDevices.forEach( d=>uBitSend(d, "LigSwiOn")) })
+    document.getElementById("LigSwiOff").addEventListener("click", () => { connectedDevices.forEach( d=>uBitSend(d, "LigSwiOff")) })
+    document.getElementById("LigClpOn").addEventListener("click", () => { connectedDevices.forEach( d=>uBitSend(d, "LigClpOn")) })
+    document.getElementById("LigClpOff").addEventListener("click", () => { connectedDevices.forEach( d=>uBitSend(d, "LigClpOff")) })
+
+</script>
+
+</html>
