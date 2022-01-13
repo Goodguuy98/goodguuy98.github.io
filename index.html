@@ -74,7 +74,7 @@
 
 <body>
 
-    <img src="assets/ex.png" id="ConnectStat" width="100px">
+    <img src="WebUSB/assets/ex.png" id="ConnectStat" width="100px">
     
     <!--Toggle switch-->
     <label class="switch" >
@@ -151,7 +151,7 @@
                     }
                 
                 //The device is connected. Update the connection status.
-                document.getElementById("ConnectStat").setAttribute("src", "assets/tick.png");
+                document.getElementById("ConnectStat").setAttribute("src", "WebUSB/assets/tick.png");
 
                 break
  
@@ -166,7 +166,7 @@
                     }
                 
                 //The device is disconnected. Update the connection status.
-                document.getElementById("ConnectStat").setAttribute("src", "assets/ex.png");
+                document.getElementById("ConnectStat").setAttribute("src", "WebUSB/assets/ex.png");
         
                 connectedDevices = connectedDevices.filter( v => v != device)
                 break
