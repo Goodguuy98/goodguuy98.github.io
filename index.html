@@ -292,12 +292,12 @@
     <button class="cybr-btn" onclick="uBitConnectDevice(uBitEventHandler)">
         Connect<span aria-hidden>_</span>
         <span aria-hidden class="cybr-btn__glitch">Connect</span>
-        <span aria-hidden class="cybr-btn__tag">V1/V2</span>
+        <span aria-hidden class="cybr-btn__tag">V1V2</span>
       </button>
-      <button class="cybr-btn">
+      <button class="cybr-btn" onclick="connectedDevices.forEach(d=>uBitDisconnect(d))">
         Disconnect<span aria-hidden>_</span>
         <span aria-hidden class="cybr-btn__glitch">Disconnect</span>
-        <span aria-hidden class="cybr-btn__tag">V1/V2</span>
+        <span aria-hidden class="cybr-btn__tag">V1V2</span>
     </button>
 
     <div class="box")>
@@ -309,21 +309,10 @@
 
         <!--Disconnect-->
         <div class="row header">
-            <button id="disconnect" class="button">Disconnect All</button>
+            <button id="disconnect" class="button" onclick="connectedDevices.forEach(d=>uBitDisconnect(d))">Disconnect All</button>
         </div>
 
-        <div class="row header">
-            <button id="LigSwiOn" class="button">Light on</button>
-        <div class="row header">
-            <button id="LigSwiOff" class="button">Light off</button>
-        <div class="row header">
-            <button id="LigClpOn" class="button">Add clap preference</button>
-        <div class="row header">
-            <button id="LigClpOff" class="button">Remove clap preference</button>
-        </div>
-        <div class="row header">
-                <button id="clear" class="button">Clear Console</button>
-        </div>
+        <button id="clear" class="button">Clear Console</button>
 
     
 
@@ -461,13 +450,9 @@
     }
 
     // Make the "go" button open the request devices box
-    document.getElementById("connect").addEventListener("click", () => uBitConnectDevice(uBitEventHandler))
-    document.getElementById("disconnect").addEventListener("click", () => connectedDevices.forEach(d=>uBitDisconnect(d)))
-    document.getElementById("clear").addEventListener("click", () => { document.getElementById("console").innerHTML = "" })
-    document.getElementById("LigSwiOn").addEventListener("click", () => { connectedDevices.forEach( d=>uBitSend(d, "LigSwiOn")) })
-    document.getElementById("LigSwiOff").addEventListener("click", () => { connectedDevices.forEach( d=>uBitSend(d, "LigSwiOff")) })
-    document.getElementById("LigClpOn").addEventListener("click", () => { connectedDevices.forEach( d=>uBitSend(d, "LigClpOn")) })
-    document.getElementById("LigClpOff").addEventListener("click", () => { connectedDevices.forEach( d=>uBitSend(d, "LigClpOff")) })
+    //document.getElementById("connect").addEventListener("click", () => uBitConnectDevice(uBitEventHandler))
+    //document.getElementById("disconnect").addEventListener("click", () => connectedDevices.forEach(d=>uBitDisconnect(d)))
+    //document.getElementById("clear").addEventListener("click", () => { document.getElementById("console").innerHTML = "" })
 
 </script>
 
