@@ -302,24 +302,13 @@
 
     <div class="box")>
 
-        <!--Connect-->
-        <div class="row header">
-            <button id="connect" class="button" onclick="uBitConnectDevice(uBitEventHandler)">Connect</button>
-        </div>
-
-        <!--Disconnect-->
-        <div class="row header">
-            <button id="disconnect" class="button" onclick="connectedDevices.forEach(d=>uBitDisconnect(d))">Disconnect All</button>
-        </div>
-
-        <button id="clear" class="button">Clear Console</button>
+    <button id="clear" class="button">Clear Console</button>
 
     
 
-        <div id="console" class="row content" style="overflow:auto;border:4px solid black;padding:2%">
-            Waiting for connection.
-        </div>                            
-    </div>
+    <div id="console" class="row content" style="overflow:auto;border:4px solid black;padding:2%">
+        Waiting for connection.
+    </div>                            
 </body>
 
 <!--  Include the webusb support library  -->
