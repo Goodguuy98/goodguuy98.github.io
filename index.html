@@ -5,6 +5,31 @@
     <meta charset="UTF-8">
     <title>Micro:bit WebUSB Console</title>
     
+    <!--Firebase-->
+    <script>
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "firebase/app";
+        import { getAnalytics } from "firebase/analytics";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+        apiKey: "AIzaSyDqGx1bD6JvKHCTJGIlzE3CDzRjucQklxI",
+        authDomain: "cs-smart-home-23e0c.firebaseapp.com",
+        projectId: "cs-smart-home-23e0c",
+        storageBucket: "cs-smart-home-23e0c.appspot.com",
+        messagingSenderId: "489015538881",
+        appId: "1:489015538881:web:6b677156e6e67e4a4b1040",
+        measurementId: "G-711NWL450G"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+    </script>
+
     <!--Toggle switch-->
     <style>
     /* The switch - the box around the slider */
