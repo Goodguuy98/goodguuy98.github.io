@@ -95,12 +95,12 @@
     border-radius: 50%;
     }
 
-    .test {
+    /* .test {
         width: 300px;
         display: flex;
         margin-left: 30px;
         flex-direction: row;
-    }
+    } */
 
 
     </style>
@@ -113,34 +113,37 @@
 
 <body>
 
-    <img src="assets/ex.png" id="ConnectStat" width="100px">
+    <img draggable="false" src="assets/ex.png" id="ConnectStat" width="100px" alt="Disconnected">
     
-    <div class="test">
+    <div>
     <!--Toggle switch-->
-    <label class="switch" >
-        <input type="checkbox" id="LigSwi" onclick="toggle(id)" disabled>
+    <label class="switch" title="Switch">
+        <input type="checkbox" accesskey="q" id="LigSwi" onclick="toggle(id)" disabled>
         <span class="slider round"></span>
     </label>
     
-    <label class="switch" >
-        <input type="checkbox" id="LigClp" onclick="toggle(id)" disabled>
+    <label class="switch" title="Clap Preference">
+        <input type="checkbox" id="LigClp" accesskey="w" onclick="toggle(id)" disabled>
         <span class="slider round"></span>
     </label>
+    </div>
 
-    <button class="cybr-btn" onclick="uBitConnectDevice(uBitEventHandler)">
+    <div>
+    <button class="cybr-btn" accesskey="c" onclick="uBitConnectDevice(uBitEventHandler)">
         Connect<span aria-hidden>_</span>
         <span aria-hidden class="cybr-btn__glitch">Connect</span>
         <span aria-hidden class="cybr-btn__tag">:bit</span>
       </button>
-    <button class="cybr-btn" onclick="connectedDevices.forEach(d=>uBitDisconnect(d))">
+    <button class="cybr-btn" accesskey="x" onclick="connectedDevices.forEach(d=>uBitDisconnect(d))">
         Disconnect<span aria-hidden>_</span>
         <span aria-hidden class="cybr-btn__glitch">Disconnect</span>
         <span aria-hidden class="cybr-btn__tag">:bit</span>
     </button>
+    </div>
 
     <div class="box")>
 
-    <button id="clear" class="button">Clear Console</button>
+    <button id="clear" accesskey="z" class="button">Clear Console</button>
 
     
 
