@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="UTF-8">
+    <title>Login</title>
+
+    <script src="importfirebase.js" type="module"></script>
+
+
+<body>
+
+    <form id="login">
+        <label for="userid">Username:   </label>
+        <input pattern=".{0,8}" title="Cannot be more than 8 characters long" type="text" id="userid" name="userid" required><br><br>
+        <label for="email">Email:   </label>
+        <input type="email" id="email" name="email" required><br><br>
+        <label for="pwd">Password: </label>
+        <!--https://www.w3schools.com/tags/att_input_pattern.asp-->
+        <input pattern="(?=.*\d).{8,}" title="Must contain 8 or more characters and at least 1 number" type="password" id="pwd" name="pwd" required><br><br>
+        <input onclick="readUserData()" type="submit" value="Submit">
+    </form>
+
+    <script>
+        
+        function readUserData() {
+            
+            var inputs, index;
+
+            inputs = document.getElementsByTagName('input');
+            for (index = 0; index < inputs.length; ++index) {
+                console.log(inputs)
+            }
+        }
+        
+        function writeUserData(userId, name, email, imageUrl) {
+        const db = getDatabase();
+        set(ref(db, 'users/' + userId), {
+            username: name,
+            email: email,
+            profile_picture : imageUrl
+        });
+        }
+    </script>
+</body>
+</head>
+</html>
