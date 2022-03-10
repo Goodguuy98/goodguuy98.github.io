@@ -33,15 +33,28 @@ function writeToggleData(dev, tally) {
     console.log("Toggle Recorded.")
     }
 
-function readToggleData() {
-    console.log("Toggle Noticed by Firebase.")
+var tallyCurrent = 0
+
+function syncToggleData(tallyReq) {
+
+    //Get latest data from Firebase
     const toggleCountRef = ref(db, 'embedded/Lig/Swi');
     onValue(toggleCountRef, (toggleNum) => {
-        //The data is an Object
-        const data = toggleNum.val();
-        //Convert the Object's values to an array and take the first value.
-        tallyCurrent = Object.values(data)[0]
-    });
+    //The data is an Object
+    const data = toggleNum.val();
+    console.log(data)
+    console.log(Object.values(data)[0])
+    //Convert the Object's values to an array and take the first value.
+    tallyCurrent = Object.values(data)[0]
+    writeToggleData('Lig', tallyCurrent)
+});
+}
+
+syncToggleData()
+
+function readToggleData() {
+    console.log("Toggle Noticed by Firebase.")
+    syncToggleData()
     tallyCurrent += 1
     writeToggleData('Lig', tallyCurrent)
 };
