@@ -22,7 +22,7 @@
     <script type="application/ld+json">{
 		"@context": "http://schema.org",
 		"@type": "Organization",
-		"name": "",
+		"name": "Nicepage",
 		"logo": "images/CompanyLogoSlogan1.png",
 		"sameAs": [
 				"https://facebook.com/name",
@@ -34,8 +34,9 @@
     <meta name="twitter:site" content="@">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Control Panel">
-    <meta name="twitter:description" content="">
+    <meta name="twitter:description" content="Nicepage">
     <meta property="og:title" content="Control Panel">
+    <meta property="og:description" content="">
     <meta property="og:type" content="website">
   </head>
   <body data-home-page="Control-Panel.html" data-home-page-title="Control Panel" class="u-body u-xl-mode"><header class="u-clearfix u-header u-palette-1-dark-3 u-header" id="sec-a6aa"><div class="u-clearfix u-sheet u-sheet-1">
@@ -232,7 +233,7 @@
                   <div class="u-container-layout u-valign-middle u-container-layout-8">
                     <h3 class="u-align-center u-text u-text-default u-text-16">There has​ been...</h3>
                     <div class="text text-17 text-default title u-clearfix u-custom-html u-custom-html-1">
-                      <h1 id="counter"><b>0</b>
+                      <h1 id="counter" style="text-align:center"><b>0</b>
                       </h1>
                     </div>
                     <h3 class="u-text u-text-default u-text-17"><b>Device Toggles*</b>
@@ -252,35 +253,17 @@
         <div class="u-container-style u-group u-radius-10 u-shape-round u-white u-group-5">
           <div class="u-container-layout u-container-layout-9">
             <div class="u-border-3 u-border-grey-dark-1 u-line u-line-vertical u-line-4"></div>
-            <h3 class="u-text u-text-default u-text-20">Connection</h3>
-            <div class="u-align-center u-clearfix u-custom-html u-custom-html-2">
-              <button class="Connect u-btn u-btn-3 u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50" accesskey="c" onclick="uBitConnectDevice(uBitEventHandler)"> Connect</button>
-            </div>
-            <div class="u-clearfix u-custom-html u-custom-html-3">
-              <img src="images/ex.png" id="ConnectStat" class="ConnectStat" width="134px" alt="Disconnected">
-            </div>
-            <div class="u-clearfix u-custom-html u-custom-html-4">
-              <button class="Connect u-btn u-btn-3 u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-4" accesskey="x" onclick="connectedDevices.forEach(d=>uBitDisconnect(d))"> Disconnect </button>
-            </div>
-          </div>
-        </div>
-        <div class="u-container-style u-group u-radius-10 u-shape-round u-white u-group-6">
-          <div class="u-container-layout u-container-layout-10">
-            <div class="u-clearfix u-custom-html u-custom-html-5">
-              <input type="checkbox" id="dummy" hidden="">
-            </div>
-            <div class="u-border-3 u-border-grey-dark-1 u-line u-line-vertical u-line-5"></div>
-            <h3 class="u-text u-text-default u-text-21">P0 Light</h3>
-            <h4 class="u-text u-text-default u-text-22">Power</h4>
+            <h3 class="u-text u-text-default u-text-20">P0 Light</h3>
+            <h4 class="u-text u-text-default u-text-21">Power</h4>
             <img class="u-image u-image-default u-image-17" src="images/lightOff.png" alt="" data-image-width="573" data-image-height="953">
-            <div class="u-clearfix u-custom-html u-custom-html-6">
+            <div class="u-clearfix u-custom-html u-custom-html-2">
               <label class="switch" title="Switch">
                 <input type="checkbox" accesskey="q" id="LigSwi" onchange="toggle(id)" disabled="">
                 <span class="round slider"></span>
               </label>
             </div>
-            <h4 class="u-text u-text-default u-text-23">Clap</h4>
-            <div class="u-clearfix u-custom-html u-custom-html-7">
+            <h4 class="u-text u-text-default u-text-22">Clap</h4>
+            <div class="u-clearfix u-custom-html u-custom-html-3">
               <label class="switch" title="Clap Preference">
                 <input type="checkbox" id="LigClp" accesskey="w" onclick="toggle(id)" disabled="">
                 <span class="round slider"></span>
@@ -288,7 +271,22 @@
             </div>
           </div>
         </div>
-        <div class="u-clearfix u-custom-html u-expanded-width u-custom-html-8"></div>
+        <div class="u-container-style u-group u-radius-10 u-shape-round u-white u-group-6">
+          <div class="u-container-layout u-container-layout-10">
+            <div class="u-border-3 u-border-grey-dark-1 u-line u-line-vertical u-line-5"></div>
+            <h3 class="u-text u-text-default u-text-23">Connection</h3>
+            <div class="u-align-center u-clearfix u-custom-html u-custom-html-4">
+              <button class="Connect u-btn u-btn-3 u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50" accesskey="c" onclick="uBitConnectDevice(uBitEventHandler)"> Connect</button>
+            </div>
+            <div class="u-clearfix u-custom-html u-custom-html-5">
+              <img src="images/ex.png" id="ConnectStat" class="ConnectStat" width="134px" alt="Disconnected">
+            </div>
+            <div class="u-clearfix u-custom-html u-custom-html-6">
+              <button class="Connect u-btn u-btn-3 u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-50 u-btn-4" accesskey="x" onclick="connectedDevices.forEach(d=>uBitDisconnect(d))"> Disconnect </button>
+            </div>
+          </div>
+        </div>
+        <div class="u-clearfix u-custom-html u-expanded-width u-custom-html-7"></div>
       </div>
     </section>
     

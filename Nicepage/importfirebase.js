@@ -3,7 +3,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.4/firebase-app.js';
 import { getAnalytics } from 'https://www.gstatic.com/firebasejs/9.6.4/firebase-analytics.js';
-import { getDatabase, ref, set, onValue, get, child} from 'https://www.gstatic.com/firebasejs/9.6.4/firebase-database.js';
+import { getDatabase, ref, set, onValue, get} from 'https://www.gstatic.com/firebasejs/9.6.4/firebase-database.js';
 
 // Firebase configuration
 const firebaseConfig = {
@@ -27,37 +27,43 @@ console.log("Firebase imported!")
 //Write Data to firebase and update webpage.
 function writeToggleData(dev) {
     
+    const toggleCountRef = ref(db, 'embedded/' + dev + '/Swi/');
+    
+    //Grabs data from firebase once.
+    get(toggleCountRef).then((toggleNum) => {
 
-    get(ref(db, 'embedded/' + dev + '/Swi/')).then((toggleNum) => {
         if (toggleNum.exists()) {
             const data = toggleNum.val()
-            var tallySnap = Object.values(data)[0] + 1
-            console.log(tallySnap)
 
+            //Adds a value to the tally.
+            var tallySnap = Object.values(data)[0] + 1
+
+            //Updates firebase with new value
             set(ref(db, 'embedded/' + dev + '/Swi'), {
                 toggleNum: tallySnap,
             });
-
             console.log("Data updated.")
-        } else {
-        console.log("No data available");
-        }
+
+        } else {console.log("No data available");}
     });
 }
 
-
 function syncToggleData(dev, tallyReq) {
 
-    //Get latest data from Firebase
+    
     const toggleCountRef = ref(db, 'embedded/' + dev + '/Swi/');
+
+    //Continuously grabs data from Firebase.
     onValue(toggleCountRef, (toggleNum) => {
 
-    //The data given as an Object
+    //The data given as an Object.
     const data = toggleNum.val();
 
     //Convert the Object's values to an array and take the first value.
     let tallyCurrent = Object.values(data)[0]
     
+
+    //Continously displays latest value.
     document.getElementById("counter").innerHTML = String(tallyCurrent)
     });
 
@@ -69,4 +75,3 @@ syncToggleData('Lig', false)
 document.getElementById("LigSwi").addEventListener('click', e=> {
     writeToggleData('Lig')
 });
-// document.getElementById("dummy").addEventListener('click', readToggleData)

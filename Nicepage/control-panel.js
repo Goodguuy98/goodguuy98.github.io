@@ -55,28 +55,23 @@ function uBitEventHandler(reason, device, data) {
         //Recieves data from microbit. For recording data to firebase and updating state.
         case "console":
 
-            console.log("Console Data: " + data.data)
+            console.log("Microbit Recieve: " + data.data)
             let checkId = data.data.slice(0, 6)
+            let checkEl = document.getElementById(checkId)
             let stateReq = data.data.slice(6)
 
             //Check if state is on or off, and update the website
-            //The string isn't exactly "On."
+            //The string isn't exactly "On." Use ".includes()"
             if (stateReq.includes("On")) {
-                
-                console.log("Device toggled on!")
-                if (stateReq.includes("Tog")) {
-                document.getElementById('dummy').click()
-                }
-
-                document.getElementById(checkId).checked = true;
+                //Fire a click event to trigger Firebase EventListener
+                checkEl.click()
+                //Ensure checkbox is correctly set
+                checkEl.checked = true;
             } else if (stateReq.includes("Off")) {
-                console.log("Device toggled off.")
-
-                if (stateReq.includes("Tog")) {
-                    document.getElementById('dummy').click()
-                }
-
-                document.getElementById(checkId).checked = false;
+                //Fire a click event to trigger Firebase EventListener
+                checkEl.click()
+                //Ensure checkbox is correctly set
+                checkEl.checked = false;
             }
 
             break
@@ -109,7 +104,7 @@ function toggle(id) {
         //Enable checkbox input after 300ms. Gives the function time to execute so it doesn't desync with the microbit.
         setTimeout(() => {  checkBox.disabled = false; }, 500);
 
-        console.log(parOn)
+        console.log("Website Sent: " + parOn)
     } else {
 
         //parOff will look something like "DevSwiOff." The microbit will get its requested operation from this.
@@ -119,6 +114,6 @@ function toggle(id) {
         //Enable checkbox input after 300ms. Gives the function time to execute so it doesn't desync with the microbit.
         setTimeout(() => {  checkBox.disabled = false; }, 500);
 
-        console.log(parOff)
+        console.log("Website Sent: " + parOff)
     }
 }
