@@ -3,7 +3,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.4/firebase-app.js';
 import { getAnalytics } from 'https://www.gstatic.com/firebasejs/9.6.4/firebase-analytics.js';
-import { getDatabase, ref, set, onValue} from 'https://www.gstatic.com/firebasejs/9.6.4/firebase-database.js';
+import { getDatabase, ref, set, onValue, get, child} from 'https://www.gstatic.com/firebasejs/9.6.4/firebase-database.js';
 
 // Firebase configuration
 const firebaseConfig = {
@@ -24,40 +24,49 @@ const db = getDatabase();
 
 console.log("Firebase imported!")
 
-//Declare function to write to firebase
-function writeToggleData(dev, tally) {
-    set(ref(db, 'embedded/' + dev + '/' + 'Swi'), {
-        toggleNum: tally,
+//Write Data to firebase and update webpage.
+function writeToggleData(dev) {
+    
+
+    get(ref(db, 'embedded/' + dev + '/Swi/')).then((toggleNum) => {
+        if (toggleNum.exists()) {
+            const data = toggleNum.val()
+            var tallySnap = Object.values(data)[0] + 1
+            console.log(tallySnap)
+
+            set(ref(db, 'embedded/' + dev + '/Swi'), {
+                toggleNum: tallySnap,
+            });
+
+            console.log("Data updated.")
+        } else {
+        console.log("No data available");
+        }
     });
-    document.getElementById("counter").innerHTML = String(tally)
-    console.log("Toggle Recorded.")
-    }
-
-var tallyCurrent = 0
-
-function syncToggleData(tallyReq) {
-
-    //Get latest data from Firebase
-    const toggleCountRef = ref(db, 'embedded/Lig/Swi');
-    onValue(toggleCountRef, (toggleNum) => {
-    //The data is an Object
-    const data = toggleNum.val();
-    console.log(data)
-    console.log(Object.values(data)[0])
-    //Convert the Object's values to an array and take the first value.
-    tallyCurrent = Object.values(data)[0]
-    writeToggleData('Lig', tallyCurrent)
-});
 }
 
-syncToggleData()
 
-function readToggleData() {
-    console.log("Toggle Noticed by Firebase.")
-    syncToggleData()
-    tallyCurrent += 1
-    writeToggleData('Lig', tallyCurrent)
-};
+function syncToggleData(dev, tallyReq) {
 
-document.getElementById("LigSwi").addEventListener('click', readToggleData)
-document.getElementById("dummy").addEventListener('click', readToggleData)
+    //Get latest data from Firebase
+    const toggleCountRef = ref(db, 'embedded/' + dev + '/Swi/');
+    onValue(toggleCountRef, (toggleNum) => {
+
+    //The data given as an Object
+    const data = toggleNum.val();
+
+    //Convert the Object's values to an array and take the first value.
+    let tallyCurrent = Object.values(data)[0]
+    
+    document.getElementById("counter").innerHTML = String(tallyCurrent)
+    });
+
+}
+
+//Updates tally display on website load.
+syncToggleData('Lig', false)
+
+document.getElementById("LigSwi").addEventListener('click', e=> {
+    writeToggleData('Lig')
+});
+// document.getElementById("dummy").addEventListener('click', readToggleData)
