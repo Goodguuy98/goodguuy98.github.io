@@ -383,13 +383,14 @@
 
 .u-section-1 .u-custom-html-1 {
   min-height: 95px;
-  width: 29px;
-  margin: 7px auto 0;
+  height: auto;
+  width: 210px;
+  margin: 5px auto 0;
 }
 
 .u-section-1 .u-text-17 {
   font-size: 2.25rem;
-  margin: 0 auto 0 220px;
+  margin: 2px auto 0 220px;
 }
 
 .u-section-1 .u-text-18 {
@@ -551,10 +552,6 @@
 
   .u-section-1 .u-group-4 {
     min-height: auto;
-  }
-
-  .u-section-1 .u-custom-html-1 {
-    height: auto;
   }
 
   .u-section-1 .u-custom-html-4 {

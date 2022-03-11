@@ -35,7 +35,7 @@ function uBitEventHandler(reason, device, data) {
             
             //The device is disconnected. Update the connection status.
             document.getElementById("ConnectStat").setAttribute("src", "images/ex.png");
-            document.getElementById("ConnectStat").setAttribute("alt", "Connected");
+            document.getElementById("ConnectStat").setAttribute("alt", "Disconnected");
     
             connectedDevices = connectedDevices.filter( v => v != device)
             break
