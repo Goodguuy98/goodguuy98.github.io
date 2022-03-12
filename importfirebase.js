@@ -87,15 +87,34 @@ if (document.URL.includes("Create") ) {
     const form = document.querySelector(".form")
 }
 
+console.log())
+
 function readUserData() {
     var inputs, index;
 
-    inputs = document.getElementsByTagName('input');
-    textareas = document.getElementsByTagName('textarea')
+    let loginData = {};
+
+    //Exclude junk via CSS psuedo-class selector.
+    inputs = document.querySelectorAll('input:not([type="hidden"]):not([type="submit"]), textarea')
+
+    console.log(typeof inputs)
+    console.log(inputs)
+    
+    console.log(inputs)
+
     for (index = 0; index < inputs.length; ++index) {
-        console.log(inputs[index])
+
+        //Added for readability.
+        let loginKey = inputs[index].name
+        let loginValue = inputs[index].value
+
+        //Save to object
+        loginData[loginKey] = loginValue
+
+        //Scrub all input fields.
         inputs[index].value = "";
     }
+
 }
 
 function writeUserData(userId, name, email, imageUrl) {
@@ -111,7 +130,7 @@ console.log(document.getElementsByName("submit")[0])
 console.log("We're Here")
 console.log(document.querySelectorAll('form')[0])
 
-document.querySelectorAll('form')[0].addEventListener('submit', e=> {
+form.addEventListener('submit', e=> {
     console.log("Stopped it!");
     e.preventDefault();
     readUserData();
