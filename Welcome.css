@@ -183,7 +183,7 @@
 .u-section-3 .u-image-5 {
   width: 187px;
   height: 56px;
-  margin: 0 auto;
+  margin: 57px auto 0;
 }
 
 .u-section-3 .u-layout-cell-6 {
@@ -797,6 +797,7 @@
   fill: #ffffff !important;
 } .u-section-5 {
   background-image: url("images/Two-Microbitmorecroppedgaussianbliur.png");
+  background-position: 50% 50%;
 }
 
 .u-section-5 .u-sheet-1 {
@@ -818,12 +819,6 @@
   margin: 20px auto 60px;
 }
 
-@media (max-width: 1199px) {
-   .u-section-5 {
-    background-position: 50% 50%;
-  }
-}
-
 @media (max-width: 767px) {
   .u-section-5 .u-text-3 {
     width: 540px;
@@ -831,11 +826,16 @@
 }
 
 @media (max-width: 575px) {
+   .u-section-5 {
+    background-position: 50% 50%;
+  }
+
   .u-section-5 .u-text-3 {
     width: 340px;
   }
 } .u-section-6 {
   background-image: url("images/WoodTexture.png");
+  background-position: 50% 50%;
 }
 
 .u-section-6 .u-sheet-1 {
@@ -920,10 +920,6 @@
 }
 
 @media (max-width: 1199px) {
-   .u-section-6 {
-    background-position: 50% 50%;
-  }
-
   .u-section-6 .u-sheet-1 {
     min-height: 750px;
   }
@@ -992,6 +988,12 @@
   .u-section-6 .u-container-layout-4 {
     padding-left: 10px;
     padding-right: 10px;
+  }
+}
+
+@media (max-width: 575px) {
+   .u-section-6 {
+    background-position: 50% 50%;
   }
 } .u-section-7 {
   background-image: none;

@@ -557,6 +557,13 @@
     height: auto;
   }
 
+  .u-section-1 .u-group-5 {
+    margin-top: 20px;
+    margin-right: -27px;
+    margin-left: auto;
+    margin-bottom: initial;
+  }
+
   .u-section-1 .u-custom-html-4 {
     height: auto;
   }
@@ -571,6 +578,10 @@
 }
 
 @media (max-width: 991px) {
+  .u-section-1 .u-sheet-1 {
+    min-height: 773px;
+  }
+
   .u-section-1 .u-tabs-1 {
     width: 720px;
     margin-right: 0;
@@ -637,6 +648,40 @@
     margin-right: 180px;
     margin-left: 191px;
   }
+
+  .u-section-1 .u-group-5 {
+    margin-top: 416px;
+    margin-right: auto;
+    margin-bottom: 0;
+  }
+
+  .u-section-1 .u-group-6 {
+    margin-top: -546px;
+    margin-left: auto;
+  }
+
+  .u-section-1 .u-text-23 {
+    margin-left: 29px;
+  }
+
+  .u-section-1 .u-custom-html-4 {
+    margin-right: 42px;
+    margin-left: 242px;
+  }
+
+  .u-section-1 .u-custom-html-5 {
+    margin-right: 235px;
+    margin-left: 39px;
+  }
+
+  .u-section-1 .u-custom-html-6 {
+    margin-right: 29px;
+    margin-left: 235px;
+  }
+
+  .u-section-1 .u-custom-html-7 {
+    margin-top: -56px;
+  }
 }
 
 @media (max-width: 767px) {
@@ -645,6 +690,7 @@
   }
 
   .u-section-1 .u-tabs-1 {
+    min-height: 584px;
     width: 540px;
   }
 
@@ -653,7 +699,9 @@
   }
 
   .u-section-1 .u-text-2 {
-    margin-left: 183px;
+    margin-top: 20px;
+    margin-right: 189px;
+    margin-left: 0;
   }
 
   .u-section-1 .u-text-3 {
@@ -668,9 +716,22 @@
     margin-left: 181px;
   }
 
+  .u-section-1 .u-table-1 {
+    margin-top: 20px;
+    margin-right: 0;
+    margin-left: 181px;
+  }
+
   .u-section-1 .u-text-6 {
-    margin-right: 109px;
-    margin-left: 282px;
+    margin-top: 20px;
+    margin-right: 0;
+    margin-left: 181px;
+  }
+
+  .u-section-1 .u-line-1 {
+    margin-top: 20px;
+    margin-left: 181px;
+    margin-right: 0;
   }
 
   .u-section-1 .u-btn-2 {
@@ -721,6 +782,7 @@
   }
 
   .u-section-1 .u-tabs-1 {
+    min-height: 541px;
     width: 340px;
   }
 
@@ -729,7 +791,8 @@
   }
 
   .u-section-1 .u-text-2 {
-    margin-left: 0;
+    margin-top: -287px;
+    margin-right: 0;
   }
 
   .u-section-1 .u-text-3 {
@@ -744,9 +807,20 @@
     margin-left: 0;
   }
 
+  .u-section-1 .u-table-1 {
+    margin-top: -142px;
+    margin-right: auto;
+    margin-left: 40px;
+  }
+
   .u-section-1 .u-text-6 {
+    margin-top: -27px;
     margin-right: 9px;
     margin-left: 182px;
+  }
+
+  .u-section-1 .u-line-1 {
+    margin-left: 0;
   }
 
   .u-section-1 .u-image-2 {
@@ -814,6 +888,7 @@
 
   .u-section-1 .u-group-5 {
     width: 340px;
+    margin-top: -238px;
     margin-left: 0;
   }
 
@@ -829,22 +904,25 @@
 
   .u-section-1 .u-group-6 {
     width: 340px;
-    margin-left: 0;
+  }
+
+  .u-section-1 .u-text-23 {
+    margin-left: 26px;
   }
 
   .u-section-1 .u-custom-html-4 {
-    margin-right: 2px;
-    margin-left: 215px;
+    margin-right: 12px;
+    margin-left: 206px;
   }
 
   .u-section-1 .u-custom-html-5 {
-    margin-right: 195px;
-    margin-left: 12px;
+    margin-right: 205px;
+    margin-left: 3px;
   }
 
   .u-section-1 .u-custom-html-6 {
-    margin-right: 0;
-    margin-left: 197px;
+    margin-right: 3px;
+    margin-left: 195px;
   }
 }/* The switch - the box around the slider */
     .switch {
