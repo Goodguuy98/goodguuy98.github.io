@@ -925,11 +925,11 @@
 
 @media (max-width: 575px) {
   .u-section-1 .u-sheet-1 {
-    min-height: 737px;
+    min-height: 982px;
   }
 
   .u-section-1 .u-tabs-1 {
-    min-height: 541px;
+    min-height: 22683px;
     width: auto;
     margin-right: initial;
     margin-left: initial;
@@ -1021,12 +1021,33 @@
   }
 
   .u-section-1 .u-group-5 {
-    width: 340px;
-    margin-top: -238px;
-    margin-left: 0;
+    margin-top: 319px;
+    margin-right: initial;
+    margin-left: initial;
+    width: auto;
+  }
+
+  .u-section-1 .u-line-4 {
+    top: 15px;
+  }
+
+  .u-section-1 .u-text-20 {
+    width: auto;
+    margin-top: 15px;
+    margin-left: 29px;
+  }
+
+  .u-section-1 .u-text-21 {
+    margin-top: 9px;
+  }
+
+  .u-section-1 .u-image-17 {
+    margin-top: -28px;
+    margin-left: 25px;
   }
 
   .u-section-1 .u-custom-html-2 {
+    margin-top: -118px;
     margin-right: 22px;
     margin-left: 236px;
   }
@@ -1037,26 +1058,38 @@
   }
 
   .u-section-1 .u-group-6 {
-    width: 340px;
+    margin-top: -499px;
+    margin-right: initial;
+    margin-left: initial;
+    width: auto;
   }
 
   .u-section-1 .u-text-23 {
-    margin-left: 26px;
+    width: auto;
+    margin-top: 21px;
+    margin-left: 21px;
   }
 
   .u-section-1 .u-custom-html-4 {
+    margin-top: -5px;
     margin-right: 12px;
     margin-left: 206px;
   }
 
   .u-section-1 .u-custom-html-5 {
-    margin-right: 205px;
-    margin-left: 3px;
+    margin-top: -57px;
+    margin-right: 192px;
+    margin-left: 16px;
   }
 
   .u-section-1 .u-custom-html-6 {
+    margin-top: -77px;
     margin-right: 3px;
     margin-left: 195px;
+  }
+
+  .u-section-1 .u-custom-html-7 {
+    margin-top: 628px;
   }
 }/* The switch - the box around the slider */
     .switch {
