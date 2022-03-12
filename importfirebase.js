@@ -87,8 +87,6 @@ if (document.URL.includes("Create") ) {
     const form = document.querySelector(".form")
 }
 
-console.log())
-
 function readUserData() {
     var inputs, index;
 
@@ -96,11 +94,6 @@ function readUserData() {
 
     //Exclude junk via CSS psuedo-class selector.
     inputs = document.querySelectorAll('input:not([type="hidden"]):not([type="submit"]), textarea')
-
-    console.log(typeof inputs)
-    console.log(inputs)
-    
-    console.log(inputs)
 
     for (index = 0; index < inputs.length; ++index) {
 
@@ -114,7 +107,6 @@ function readUserData() {
         //Scrub all input fields.
         inputs[index].value = "";
     }
-
 }
 
 function writeUserData(userId, name, email, imageUrl) {
