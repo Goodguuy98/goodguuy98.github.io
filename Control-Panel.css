@@ -383,7 +383,6 @@
 
 .u-section-1 .u-custom-html-1 {
   min-height: 95px;
-  height: auto;
   width: 210px;
   margin: 5px auto 0;
 }
@@ -552,6 +551,10 @@
 
   .u-section-1 .u-group-4 {
     min-height: auto;
+  }
+
+  .u-section-1 .u-custom-html-1 {
+    height: auto;
   }
 
   .u-section-1 .u-custom-html-4 {

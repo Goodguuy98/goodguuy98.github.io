@@ -36425,6 +36425,11 @@ a.u-link.u-text-hover-grey-90:hover {
   }
 }
 
+ /*begin-variables custom-site-css*/body {
+    min-width: 1280px; // change width as needed to fit your page
+	max-width: 1440px; // change width as needed to fit your page
+}
+/*end-variables custom-site-css*/
  /*begin-variables base-font-size*/ 
  html { font-size: 16px; }
  /*end-variables base-font-size*/

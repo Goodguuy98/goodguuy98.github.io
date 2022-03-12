@@ -24,6 +24,7 @@ const db = getDatabase();
 
 console.log("Firebase imported!")
 
+//Control Panel Code--------------------------------------------------------------------
 //Write Data to firebase and update webpage.
 function writeToggleData(dev) {
     
@@ -69,9 +70,49 @@ function syncToggleData(dev, tallyReq) {
 
 }
 
-//Updates tally display on website load.
-syncToggleData('Lig', false)
+//Executes functions for control panel, only on the control panel
+if (document.URL.includes("Control") ) {
+    //Updates tally display on website load.
+    syncToggleData('Lig', false)
 
-document.getElementById("LigSwi").addEventListener('click', e=> {
+    document.getElementById("LigSwi").addEventListener('click', e=> {
     writeToggleData('Lig')
+    }); 
+}
+
+//Control Panel Code--------------------------------------------------------------------
+//Account Form Code--------------------------------------------------------------------
+
+if (document.URL.includes("Create") ) {
+    const form = document.querySelector(".form")
+}
+
+function readUserData() {
+    var inputs, index;
+
+    inputs = document.getElementsByTagName('input');
+    textareas = document.getElementsByTagName('textarea')
+    for (index = 0; index < inputs.length; ++index) {
+        console.log(inputs[index])
+        inputs[index].value = "";
+    }
+}
+
+function writeUserData(userId, name, email, imageUrl) {
+const db = getDatabase();
+set(ref(db, 'users/' + userId), {
+    username: name,
+    email: email,
+    profile_picture : imageUrl
 });
+}
+
+console.log(document.getElementsByName("submit")[0])
+console.log("We're Here")
+console.log(document.querySelectorAll('form')[0])
+
+document.querySelectorAll('form')[0].addEventListener('submit', e=> {
+    console.log("Stopped it!");
+    e.preventDefault();
+    readUserData();
+    });
