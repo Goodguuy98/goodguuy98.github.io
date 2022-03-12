@@ -87,7 +87,7 @@ if (document.URL.includes("Create") ) {
     const form = document.querySelector(".form")
 }
 
-function readUserData() {
+function captureUserData() {
     var inputs, index;
 
     let loginData = {};
@@ -107,15 +107,14 @@ function readUserData() {
         //Scrub all input fields.
         inputs[index].value = "";
     }
-}
 
-function writeUserData(userId, name, email, imageUrl) {
-const db = getDatabase();
-set(ref(db, 'users/' + userId), {
-    username: name,
-    email: email,
-    profile_picture : imageUrl
-});
+    var userid = loginData['userid']
+    console.log("The user's userid is... "+ userid)
+    delete loginData.userid
+    set(ref(db, 'users/' + userid), loginData);
+    
+    console.log(loginData)
+    console.log("Sent to Firebase!")
 }
 
 console.log(document.getElementsByName("submit")[0])
@@ -125,5 +124,5 @@ console.log(document.querySelectorAll('form')[0])
 form.addEventListener('submit', e=> {
     console.log("Stopped it!");
     e.preventDefault();
-    readUserData();
+    captureUserData();
     });
