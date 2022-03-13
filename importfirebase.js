@@ -157,21 +157,22 @@ function populateQuotes() {
 
                 qSlots[i].innerHTML = Object.values(data)[randMsg]['msg'] + " - " + intro +  Object.keys(data)[randMsg]
                 delete data[Object.keys(data)[randMsg]]
-                
+
                 if (i == qSlots.length - 1) {
                     break
                 }
 
             }
+        } else {
+            return
         }
     });
 }
+console.log(document.URL)
 
 //Executes functions for welcome page, only on welcome page.
 if (document.URL.includes("Welcome")) {
     //Grab all the blockquote tags in "Quote Slots" variable
     var qSlots = document.querySelectorAll('blockquote')
-    //Get the number of blockquote tags.
-    const qSlotNum = qSlots.length
     populateQuotes()
 };
