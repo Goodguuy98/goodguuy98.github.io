@@ -168,7 +168,7 @@ function populateQuotes() {
         }
     });
 }
-console.log(document.URL)
+console.log(window.location.href)
 
 //Executes functions for welcome page, only on welcome page.
 if (document.URL.includes("Welcome")) {
