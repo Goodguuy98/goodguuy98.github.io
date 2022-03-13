@@ -1,9 +1,9 @@
-// When Firebase was initialised externally, the modules did not import correctly.
+// Firebase API Ref https://firebase.google.com/docs/reference
 // Firebase initialise str------------------------------------------------------------------------------------------
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.4/firebase-app.js';
 import { getAnalytics } from 'https://www.gstatic.com/firebasejs/9.6.4/firebase-analytics.js';
-import { getDatabase, ref, set, onValue, get} from 'https://www.gstatic.com/firebasejs/9.6.4/firebase-database.js';
+import { getDatabase, ref, set, onValue, get, child} from 'https://www.gstatic.com/firebasejs/9.6.4/firebase-database.js';
 
 // Firebase configuration
 const firebaseConfig = {
@@ -26,6 +26,7 @@ console.log("Firebase imported!")
 
 //Control Panel Code--------------------------------------------------------------------
 //Write Data to firebase and update webpage.
+
 function writeToggleData(dev) {
     
     const toggleCountRef = ref(db, 'embedded/' + dev + '/Swi/');
@@ -67,7 +68,6 @@ function syncToggleData(dev, tallyReq) {
     //Continously displays latest value.
     document.getElementById("counter").innerHTML = String(tallyCurrent)
     });
-
 }
 
 //Executes functions for control panel, only on the control panel
@@ -83,6 +83,7 @@ if (document.URL.includes("Control") ) {
 //Control Panel Code--------------------------------------------------------------------
 //Account Form Code--------------------------------------------------------------------
 
+// Grab form html element
 if (document.URL.includes("Create") ) {
     const form = document.querySelector(".form")
 }
@@ -108,21 +109,69 @@ function captureUserData() {
         inputs[index].value = "";
     }
 
+    console.log("Form data captured!")
+
+    //The userid will be stored path to the data, not in the data object itself.
     var userid = loginData['userid']
-    console.log("The user's userid is... "+ userid)
     delete loginData.userid
     set(ref(db, 'users/' + userid), loginData);
-    
-    console.log(loginData)
+
     console.log("Sent to Firebase!")
 }
 
-console.log(document.getElementsByName("submit")[0])
-console.log("We're Here")
-console.log(document.querySelectorAll('form')[0])
+//Listen for a form submission, only on create an account page.
+if (document.URL.includes("Create") ) {
+    form.addEventListener('submit', e=> {
+        console.log("Stopped it!");
+        e.preventDefault();
+        captureUserData();
+        });
+}
 
-form.addEventListener('submit', e=> {
-    console.log("Stopped it!");
-    e.preventDefault();
-    captureUserData();
+//Control Panel Code--------------------------------------------------------------------
+//Welcome Code--------------------------------------------------------------------------
+
+const pre = ["lovingly written", "imposingly dictated", "hastily telegraphed", "brandishly typed", "poetically recited", "line dropped", "carefully composed", "jubilantly passed on", "concisely conveyed", "needlessly broadcasted", "prolificly proclaimed", "covertly divulged", "happily imparted"]
+const adj = ["doglike", "petulant", "great", "humble", "bodacious", "chucklesome", "eccentric", "amiable", "gregarious", "anti-social", "forlorne", "contested", "impartial"]
+
+function populateQuotes() {
+
+    get(child(ref(db), `users/`)).then((userData) => {
+        if (userData.exists()) {
+            //Takes data sorted by users.
+            let data = userData.val()
+
+            //Integer of the amount of users.
+            var initialLen = Object.keys(data).length
+
+            for (let i = 0; i < initialLen; i++) {
+
+                //The current length of object keys array will serve as cap for number generation.
+                let currentLen = Object.keys(data).length
+                //Generate a random number between 0 (inclusive) and amount of users (exclusive).
+                let randMsg = (Math.floor((Math.random() * currentLen) + 0));
+                let randPre = (Math.floor((Math.random() * pre.length) + 0));
+                let randAdj = (Math.floor((Math.random() * adj.length) + 0));
+
+                let intro = pre[randPre] + " by the " + adj[randAdj] + " "
+
+                qSlots[i].innerHTML = Object.values(data)[randMsg]['msg'] + " - " + intro +  Object.keys(data)[randMsg]
+                delete data[Object.keys(data)[randMsg]]
+                
+                if (i == qSlots.length - 1) {
+                    break
+                }
+
+            }
+        }
     });
+}
+
+//Executes functions for welcome page, only on welcome page.
+if (document.URL.includes("Welcome")) {
+    //Grab all the blockquote tags in "Quote Slots" variable
+    var qSlots = document.querySelectorAll('blockquote')
+    //Get the number of blockquote tags.
+    const qSlotNum = qSlots.length
+    populateQuotes()
+};
