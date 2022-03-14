@@ -93,6 +93,8 @@ function uBitEventHandler(reason, device, data) {
 }
 
 function toggle(id) {
+
+    //toggle() should not activate on reception of Micro:Bit string to prevent redundant data exchange. Interrupt function.
     if (autoClick == true) {
         autoClick = false
         return

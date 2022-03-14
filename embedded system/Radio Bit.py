@@ -15,3 +15,4 @@ def on_data_received():
 serial.on_data_received(serial.delimiters(Delimiters.NEW_LINE), on_data_received)
 
 radio.set_group(1)
+basic.show_icon(IconNames.YES)
