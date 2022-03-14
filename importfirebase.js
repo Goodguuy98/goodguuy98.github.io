@@ -171,7 +171,7 @@ function populateQuotes() {
 
 // The welcome page's URL varies from Welcome.html to index.html
 // The only reliable method to check if we're on the page is to check if its unique blockquote section exists.
-if (document.querySelector('section[id="sec-3b5c"')) {
+if (document.querySelector('section[id="sec-3b5c"]')) {
     console.log(window.location.href)
     //Grab all the blockquote tags in "Quote Slots" variable
     var qSlots = document.querySelectorAll('blockquote')
