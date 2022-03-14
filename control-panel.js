@@ -1,6 +1,9 @@
 // List of connected devices (a single value could be used if only connecting to one device)
 var connectedDevices = []
 
+//Used to differentiate between User toggles and Micro:bit toggles.
+var autoClick = false
+
 // Example event call-back handler
 function uBitEventHandler(reason, device, data) {
 
@@ -63,11 +66,15 @@ function uBitEventHandler(reason, device, data) {
             //Check if state is on or off, and update the website
             //The string isn't exactly "On." Use ".includes()"
             if (stateReq.includes("On")) {
+                //The click was automatic. Mark it as such to prevent a redundant toggle() call.
+                autoClick = true
                 //Fire a click event to trigger Firebase EventListener
                 checkEl.click()
                 //Ensure checkbox is correctly set
                 checkEl.checked = true;
             } else if (stateReq.includes("Off")) {
+                //The click was automatic. Mark it as such to prevent a redundant toggle() call.
+                autoClick = true
                 //Fire a click event to trigger Firebase EventListener
                 checkEl.click()
                 //Ensure checkbox is correctly set
@@ -86,6 +93,11 @@ function uBitEventHandler(reason, device, data) {
 }
 
 function toggle(id) {
+    if (autoClick == true) {
+        autoClick = false
+        return
+    }
+    
     // Get the checkbox
     var checkBox = document.getElementById(id);
 
