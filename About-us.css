@@ -9,7 +9,6 @@
 .u-section-1 .u-group-1 {
   width: 1186px;
   min-height: 450px;
-  height: auto;
   margin: 118px -23px 60px;
 }
 
@@ -30,7 +29,6 @@
 
 .u-section-1 .u-custom-html-2 {
   min-height: 85px;
-  height: auto;
   margin: -112px 622px 0 410px;
 }
 
@@ -70,7 +68,6 @@
     width: 940px;
     margin-left: 0;
     margin-right: 0;
-    height: auto;
   }
 
   .u-section-1 .u-custom-html-1 {
@@ -79,6 +76,7 @@
   }
 
   .u-section-1 .u-custom-html-2 {
+    height: auto;
     margin-right: 499px;
     margin-left: 287px;
   }
