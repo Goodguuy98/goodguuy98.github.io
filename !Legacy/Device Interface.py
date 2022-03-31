@@ -76,14 +76,14 @@ def switch(device : str, state, trigger):
         if periphState[targetIndex] == 0:
             pins.digital_write_pin(targetPort, 1)
             periphState[targetIndex] = 1
-            serial.write_line(device + "SwiOnTog")
-            radio.send_string(device + "SwiOnTog")
+            serial.write_line(device + "SwiOn")
+            radio.send_string(device + "SwiOn")
         #and vice versa
         else:
             pins.digital_write_pin(targetPort, 0)
             periphState[targetIndex] = 0
-            serial.write_line(device + "SwiOffTog")
-            radio.send_string(device + "SwiOffTog")
+            serial.write_line(device + "SwiOff")
+            radio.send_string(device + "SwiOff")
 
     #Toggle end------------------------------------------------------------------------------------
 

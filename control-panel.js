@@ -103,31 +103,18 @@ function toggle(id) {
     // Get the checkbox
     var checkBox = document.getElementById(id);
 
-    //The ID already resembles the string that must be sent.
-    //We only need to add on the parameter.
-    var parOn = id + "On";
-    var parOff = id + "Off";
-
-    //If checkbox is checked, turn on device. If not, do not.
     if (checkBox.checked == true) {
-
-        //parOn will look something like "DevSwiOn." The microbit will get its requested operation from this.
-        connectedDevices.forEach( d=>uBitSend(d, parOn));
-        //Disable the checkbox input.
-        checkBox.disabled = true;
-        //Enable checkbox input after 300ms. Gives the function time to execute so it doesn't desync with the microbit.
-        setTimeout(() => {  checkBox.disabled = false; }, 500);
-
-        console.log("Website Sent: " + parOn)
+        var req = id + "On";
     } else {
-
-        //parOff will look something like "DevSwiOff." The microbit will get its requested operation from this.
-        connectedDevices.forEach( d=>uBitSend(d, parOff));
-        //Disable the checkbox input.
-        checkBox.disabled = true;
-        //Enable checkbox input after 300ms. Gives the function time to execute so it doesn't desync with the microbit.
-        setTimeout(() => {  checkBox.disabled = false; }, 500);
-
-        console.log("Website Sent: " + parOff)
+        var req = id + "Off";
     }
+        
+    //par will look something like "DevSwiOn." The microbit will get its requested operation from this.
+    connectedDevices.forEach( d=>uBitSend(d, req));
+    //Disable the checkbox input.
+    checkBox.disabled = true;
+    //Enable checkbox input after 300ms. Gives the function time to execute so it doesn't desync with the microbit.
+    setTimeout(() => {  checkBox.disabled = false; }, 500);
+
+    console.log("Website Sent: " + req)
 }
